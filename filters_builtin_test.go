@@ -29,7 +29,7 @@ func FuzzBuiltinFilters(f *testing.F) {
 
 	f.Fuzz(func(t *testing.T, value, filterArg string) {
 		ts := NewSet("fuzz-test", &DummyLoader{})
-		for name := range filters {
+		for name := range ts.filters {
 			tpl, err := ts.FromString(fmt.Sprintf("{{ %v|%v:%v }}", value, name, filterArg))
 			if tpl != nil && err != nil {
 				t.Errorf("filter=%q value=%q, filterArg=%q, err=%v", name, value, filterArg, err)
